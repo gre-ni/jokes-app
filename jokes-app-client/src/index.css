@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+    --color-accent: #f91111;
+    --color-highlight: #aed318;
+    /* Highlight colours for click-cycling are defined in App.jsx */
+
+    --color-bg: #f1f1ef;
+    --color-grey: #7b69574d;
+    --color-lighter-bg: #faf5e7;
+    --color-dark: #2f2f2f;
+    --color-p: #606060;
+    --color-inactive: #c2c2c2;
+    --font-serif: "Lustria", serif;
+    --font-mono: "JetBrains Mono", monospace;
+}

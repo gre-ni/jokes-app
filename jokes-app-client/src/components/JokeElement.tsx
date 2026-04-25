@@ -6,12 +6,21 @@ type JokeProps = {
 
 export const JokeElement = ({ joke }: JokeProps) => {
     return (
-        <div key={joke.id}>
-            <h3>{joke.setup}</h3>
-            <p>{joke.punchline}</p>
-            <div>
-                <p>Category: {joke.category}</p>
-                <p>Rating: {joke.rating}</p>
+        <div key={joke.id} className="my-4 p-4 rounded bg-lighter-bg">
+            <div className="mb-2">
+                <h3 className="">{joke.setup}</h3>
+                <p>{joke.punchline}</p>
+            </div>
+            <div className="flex flex-row gap-3">
+                <p className="bg-highlight py-1 px-3 rounded-sm">
+                    {joke.category}
+                </p>
+                <div className="">
+                    {joke.rating}
+                    {/* { for (let i = 0; i < joke.rating; i++) {
+                        console.log(i)
+                        }} */}
+                </div>
             </div>
         </div>
     );
