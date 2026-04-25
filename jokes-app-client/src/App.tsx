@@ -1,21 +1,19 @@
 import { JokeList } from "./components/JokeList";
+import { JokeForm } from "./components/JokeForm.tsx";
 import type { Joke as JokeType } from "./types.ts";
 import type { Category } from "./types.ts";
 import { useState, useEffect } from "react";
+import { categories } from "./utils.ts";
 
 function App() {
+    type AllOptions = Category | undefined | "ALL";
+
     const [jokeData, setJokeData] = useState<JokeType[] | undefined>(undefined);
-    const [selectedType, setSelectedType] = useState<Category | undefined>();
+    const [selectedType, setSelectedType] = useState<AllOptions>(undefined);
 
-    const categories: Category[] = [
-        "DAD",
-        "GENERAL",
-        "KNOCK_KNOCK",
-        "PROGRAMMING",
-    ];
-
-    const changeCategory = (e) => {
-        setSelectedType(e.target.value);
+    const changeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedType(e.target.value as AllOptions);
+        console.log(selectedType);
     };
 
     useEffect(() => {
@@ -24,7 +22,9 @@ function App() {
             const fetchedData = (await response.json()) as JokeType[];
             setJokeData(fetchedData);
         };
-        const fetchSelectedData = async (category: Category): Promise<void> => {
+        const fetchSelectedData = async (
+            category: Category | undefined,
+        ): Promise<void> => {
             const response = await fetch(
                 `http://localhost:8080/jokes?category=${category}`,
             );
@@ -32,7 +32,7 @@ function App() {
             setJokeData(fetchedData);
         };
 
-        if (selectedType === undefined) {
+        if (selectedType === undefined || selectedType === "ALL") {
             fetchAllData();
         } else {
             fetchSelectedData(selectedType);
@@ -45,11 +45,18 @@ function App() {
 
     return (
         <div className="max-w-md m-auto">
-            <select onChange={changeCategory}>
-                {categories.map((category) => (
-                    <option>{category}</option>
-                ))}
-            </select>
+            <div className="flex flex-row gap-2">
+                <p>Select category:</p>
+                <select onChange={changeCategory} defaultValue={"ALL"}>
+                    {categories.map((category) => (
+                        <option key={category} value={category}>
+                            {category}
+                        </option>
+                    ))}
+                    <option value={"ALL"}>ALL</option>
+                </select>
+            </div>
+            <JokeForm />
             <JokeList jokes={jokeData} />
         </div>
     );

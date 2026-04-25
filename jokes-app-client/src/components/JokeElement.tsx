@@ -4,6 +4,10 @@ type JokeProps = {
     joke: JokeType;
 };
 
+// const deleteJoke = (id: number) => {
+
+// }
+
 export const JokeElement = ({ joke }: JokeProps) => {
     return (
         <div key={joke.id} className="my-4 p-4 rounded bg-lighter-bg">
@@ -15,12 +19,8 @@ export const JokeElement = ({ joke }: JokeProps) => {
                 <p className="bg-highlight py-1 px-3 rounded-sm">
                     {joke.category}
                 </p>
-                <div className="">
-                    {joke.rating}
-                    {/* { for (let i = 0; i < joke.rating; i++) {
-                        console.log(i)
-                        }} */}
-                </div>
+                <div className="">{joke.rating}</div>
+                {/* <button onClick={(joke.id) => deleteJoke}></button> */}
             </div>
         </div>
     );
