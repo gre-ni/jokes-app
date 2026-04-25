@@ -1,7 +1,7 @@
-import { type Joke } from "../types.ts";
+import type { Joke as JokeType } from "../types.ts";
 
 type JokeProps = {
-    joke: Joke;
+    joke: JokeType;
 };
 
 export const JokeElement = ({ joke }: JokeProps) => {
